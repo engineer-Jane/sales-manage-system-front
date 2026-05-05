@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": null,
+  "build": {
+    "env": {
+      "REACT_APP_USE_MOCK_API": "true"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/((?!api).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

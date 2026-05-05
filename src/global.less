@@ -1,0 +1,149 @@
+@import '~antd/es/style/variable.less';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+.ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+  left: unset;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+@media (max-width: @screen-xs) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+
+    &-thead>tr,
+    &-tbody>tr {
+
+      >th,
+      >td {
+        white-space: pre;
+
+        >span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// Compatible with IE11
+@media screen and(-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+  body .ant-design-pro>.ant-layout {
+    min-height: 100vh;
+  }
+}
+
+.sales-form {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+}
+
+.sales-form .ant-form {
+  width: 1000px;
+  min-width: 800px;
+}
+
+.sales-form .ant-form .sales-form-content {
+  margin-bottom: 24px;
+}
+
+.sales-form .sales-form-footer {
+  position: fixed;
+  bottom: 0;
+  background-color: #f8f8fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 64px;
+  box-shadow: 0px -2px 8px 0px rgb(0 0 0 / 6%);
+}
+
+.sales-pdf-modal {}
+
+.sales-pdf-table .ant-table-thead>tr>th {
+  background: #bae7ff;
+}
+
+.sales-pdf-table-ex-warehouse .ant-table-footer {
+  padding: 0;
+}
+
+.sales-pdf-table-ex-warehouse .ant-table-footer>div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 16px;
+  height: 40px;
+}
+
+.sales-pdf-table-ex-warehouse .ant-table-footer>div span {
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+
+.sales-page .ant-pro-card-col {
+  // height: 100%;
+  min-height: 750px;
+}
+
+.sales-page .ant-pro-card {
+  height: 100%;
+}
+
+.sales-page .ant-pro-card-split-vertical {
+  border-right: 0px solid #eeeeee;
+}
+
+.sales-page .ant-pro-page-container-children-content {
+  margin: 16px 16px 0;
+  min-height: 750px;
+}
+
+.sales-page .ant-pro-table {
+  height: 100%;
+}
+
+.sales-page .ant-pro-table .ant-pro-table-search,
+.sales-page .ant-pro-table .ant-pro-table-extra .ant-card-body,
+.sales-page .ant-pro-table .ant-card .ant-card-body {
+  padding: 16px;
+}
+
+.sales-page .ant-card {
+  height: calc(100% - 96px) !important;
+}
