@@ -135,25 +135,25 @@ const TableList: React.FC = () => {
           <Space>
             {/* 0-草稿， 1-审核中，2-未通过，3-已通过，4-已生效 */}
             {/* 编辑 -  */}
-            // <Access accessible={access.auth('daily.costApply.edit')}>
+            <Access accessible={access.auth('daily.costApply.edit')}>
               {[0, 2].indexOf(r?.applyStatus) > -1 && <a onClick={() => onJump(r?.costApplyId)}>编辑</a>}
-            // </Access>
+            </Access>
             {/* 提交审核 */}
-            // <Access accessible={access.auth('daily.costApply.submit')}>
+            <Access accessible={access.auth('daily.costApply.submit')}>
               {r?.applyStatus === 0 && <a onClick={() => handleConfirm(r?.costApplyId, '提交')}>提交</a>}
-            // </Access>
+            </Access>
             {/* 审核 */}
-            // <Access accessible={access.auth('daily.costApply.audit')}>
+            <Access accessible={access.auth('daily.costApply.audit')}>
               {r?.applyStatus === 1 && <DetailsDrawer title="审核" id={r?.costApplyId} refreshTable={refreshTable} />}
-            // </Access>
+            </Access>
             {/* 详情 */}
-            // <Access accessible={access.auth('daily.costApply.details')}>
+            <Access accessible={access.auth('daily.costApply.details')}>
               <DetailsDrawer title="查看详情" id={r?.costApplyId} refreshTable={refreshTable} />
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('daily.costApply.delete')}>
+            <Access accessible={access.auth('daily.costApply.delete')}>
               {[0, 2].indexOf(r?.applyStatus) > -1 && <a onClick={() => handleConfirm(r?.costApplyId, '删除')}>删除</a>}
-            // </Access>
+            </Access>
           </Space>
         )
       }
@@ -172,12 +172,12 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('daily.costApply.add')}>
+          <Access accessible={access.auth('daily.costApply.add')}>
             <Button type="primary" onClick={() => onJump()}>
               <PlusOutlined />
               新增
             </Button>
-          // </Access>
+          </Access>
         }
         // options={false}
         request={(params, sorter, filter) =>

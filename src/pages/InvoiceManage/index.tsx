@@ -160,25 +160,25 @@ const TableList: React.FC = () => {
           <Space>
             {/* 0-草稿， 1-审核中，2-未通过，3-已通过，4-已生效 */}
             {/* 编辑 -  */}
-            // <Access accessible={access.auth('bills.invoice.edit')}>
+            <Access accessible={access.auth('bills.invoice.edit')}>
               {[0, 2].indexOf(r?.status) > -1 && <a onClick={() => onJump(r?.invoiceRecordId)}>编辑</a>}
-            // </Access>
+            </Access>
             {/* 提交审核 */}
-            // <Access accessible={access.auth('bills.invoice.submit')}>
+            <Access accessible={access.auth('bills.invoice.submit')}>
               {r?.status === 0 && <a onClick={() => handleConfirm(r?.invoiceRecordId, '提交')}>提交</a>}
-            // </Access>
+            </Access>
             {/* 审核 */}
-            // <Access accessible={access.auth('bills.invoice.audit')}>
+            <Access accessible={access.auth('bills.invoice.audit')}>
               {r?.status === 1 && <DetailsDrawer title="审核" id={r?.invoiceRecordId} refreshTable={refreshTable} />}
-            // </Access>
+            </Access>
             {/* 详情 */}
-            // <Access accessible={access.auth('bills.invoice.details')}>
+            <Access accessible={access.auth('bills.invoice.details')}>
               <DetailsDrawer title="查看详情" id={r?.invoiceRecordId} refreshTable={refreshTable} />
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('bills.invoice.delete')}>
+            <Access accessible={access.auth('bills.invoice.delete')}>
               {[0, 2].indexOf(r?.status) > -1 && <a onClick={() => handleConfirm(r?.invoiceRecordId, '删除')}>删除</a>}
-            // </Access>
+            </Access>
           </Space>
         )
       }
@@ -197,20 +197,20 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('bills.invoice.add')}>
+          <Access accessible={access.auth('bills.invoice.add')}>
             <Button type="primary" onClick={() => onJump()}>
               <PlusOutlined />
               新增
             </Button>
-          // </Access>
+          </Access>
         }
         toolBarRender={() => [
-          // <Access accessible={access.auth('bills.invoice.export')}>
-            <Button key="" onClick={() => downloadExcel('POST', EXPORT_URL['INVOICE_RECORD'], param)}>
+          <Access key="export" accessible={access.auth('bills.invoice.export')}>
+            <Button onClick={() => downloadExcel('POST', EXPORT_URL['INVOICE_RECORD'], param)}>
               <DownloadOutlined />
               导出明细
             </Button>
-          // </Access>
+          </Access>
         ]}
         // options={false}
         request={(params, sorter, filter) =>

@@ -129,13 +129,13 @@ const TableList: React.FC = () => {
         return (
           <Space>
             {/* 编辑 */}
-            // <Access accessible={access.auth('stock.storage.edit')}>
+            <Access accessible={access.auth('stock.storage.edit')}>
               <a onClick={() => onJump(r?.purchaseStockId)}>编辑</a>
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('stock.storage.delete')}>
+            <Access accessible={access.auth('stock.storage.delete')}>
               <a onClick={() => handleDelete(r?.purchaseStockId)}>删除</a>
-            // </Access>
+            </Access>
           </Space>
         )
       }
@@ -154,20 +154,20 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('stock.storage.add')}>
+          <Access accessible={access.auth('stock.storage.add')}>
             <Button type="primary" onClick={() => onJump()}>
               <PlusOutlined />
               新增
             </Button>
-          // </Access>
+          </Access>
         }
         toolBarRender={() => [
-          // <Access accessible={access.auth('stock.storage.export')}>
-            <Button key="" onClick={() => downloadExcel('POST', EXPORT_URL['STOCK'], param)}>
+          <Access key="export" accessible={access.auth('stock.storage.export')}>
+            <Button onClick={() => downloadExcel('POST', EXPORT_URL['STOCK'], param)}>
               <DownloadOutlined />
               导出明细
             </Button>
-          // </Access>
+          </Access>
         ]}
         // options={false}
         request={(params, sorter, filter) =>

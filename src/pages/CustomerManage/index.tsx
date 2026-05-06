@@ -127,13 +127,13 @@ const TableList: React.FC = () => {
         return (
           <Space>
             {/* 编辑 */}
-            // <Access accessible={access.auth('base.customer.edit')}>
+            <Access accessible={access.auth('base.customer.edit')}>
               <a onClick={() => onJump(r?.customerId)}>编辑</a>
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('base.customer.delete')}>
+            <Access accessible={access.auth('base.customer.delete')}>
               <a onClick={() => handleDelete(r?.customerId)}>删除</a>
-            // </Access>
+            </Access>
           </Space>
         );
       },
@@ -153,12 +153,12 @@ const TableList: React.FC = () => {
           pageSize: 10,
         }}
         headerTitle={
-          // <Access accessible={access.auth('base.customer.add')}>
+          <Access accessible={access.auth('base.customer.add')}>
             <Button type="primary" onClick={() => onJump()}>
               <PlusOutlined />
               新增
             </Button>
-          // </Access>
+          </Access>
         }
         // toolBarRender={false}
         // options={false}

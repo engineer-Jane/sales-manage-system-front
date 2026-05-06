@@ -49,12 +49,12 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchPermissionCodes = async () => {
     try {
-      const permissionCodes = await getLocalData('permissionCodes');
-      return permissionCodes;
+      const raw = await getLocalData('permissionCodes');
+      return Array.isArray(raw) ? raw : [];
     } catch (error) {
       history.push(loginPath);
     }
-    return undefined;
+    return [];
   };
 
   const fetchUserInfo = async () => {

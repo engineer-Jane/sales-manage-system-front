@@ -146,17 +146,17 @@ const TableList: React.FC = () => {
         return (
           <Space>
             {/* 编辑 */}
-            // <Access accessible={access.auth('order.purchase.edit')}>
+            <Access accessible={access.auth('order.purchase.edit')}>
               <a onClick={() => onJump(r?.orderId)}>编辑</a>
-            // </Access>
+            </Access>
             {/* 合同 */}
-            // <Access accessible={access.auth('order.purchase.contract')}>
+            <Access accessible={access.auth('order.purchase.contract')}>
               <Contract id={r?.orderId} />
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('order.purchase.delete')}>
+            <Access accessible={access.auth('order.purchase.delete')}>
               <a onClick={() => handleDelete(r?.orderId)}>删除</a>
-            // </Access>
+            </Access>
           </Space>
         )
       }
@@ -175,20 +175,20 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('order.purchase.add')}>
+          <Access accessible={access.auth('order.purchase.add')}>
             <Button type="primary" onClick={() => onJump()}>
               <PlusOutlined />
               新增
             </Button>
-          // </Access>
+          </Access>
         }
         toolBarRender={() => [
-          // <Access accessible={access.auth('order.purchase.export')}>
-            <Button key="" onClick={() => downloadExcel('POST', EXPORT_URL['ORDER'], param)}>
+          <Access key="export" accessible={access.auth('order.purchase.export')}>
+            <Button onClick={() => downloadExcel('POST', EXPORT_URL['ORDER'], param)}>
               <DownloadOutlined />
               导出明细
             </Button>
-          // </Access>
+          </Access>
         ]}
         // options={false}
         request={(params, sorter, filter) =>

@@ -100,8 +100,7 @@ const TableList: React.FC<TableListProps> = (props) => {
       render: (t, r) => {
         return (
           <Space>
-            {/* 编辑 */}
-            // <Access accessible={access.auth('base.department.edit')}>
+            <Access accessible={access.auth('base.department.edit')}>
               <AddModal
                 title="编辑"
                 parentId={parentId}
@@ -109,14 +108,13 @@ const TableList: React.FC<TableListProps> = (props) => {
                 id={r?.departmentId}
                 refreshTable={refreshTable}
               />
-            // </Access>
-            {/* 删除 */}
-            // <Access accessible={access.auth('base.department.delete')}>
+            </Access>
+            <Access accessible={access.auth('base.department.delete')}>
               <a onClick={() => handleDelete(r?.departmentId)}>删除</a>
-            // </Access>
+            </Access>
           </Space>
-        )
-      }
+        );
+      },
     }
   ]
 
@@ -132,14 +130,14 @@ const TableList: React.FC<TableListProps> = (props) => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('base.department.add')}>
+          <Access accessible={access.auth('base.department.add')}>
             <AddModal
               title="新增"
               parentId={parentId}
               treeData={treeData}
               refreshTable={refreshTable}
             />
-          // </Access>
+          </Access>
         }
         // toolBarRender={false}
         // options={false}

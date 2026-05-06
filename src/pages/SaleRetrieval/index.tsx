@@ -9,11 +9,13 @@ import { downloadExcel } from '@/utils/file';
 import { EXPORT_URL } from '@/constants/api';
 import type { API } from './typings';
 import { saleApi } from '@/services/api';
+import { useAccess, Access } from 'umi';
 
 /** 销售退库单 */
 
 const TableList: React.FC = () => {
   const actionRef = useRef<ActionType>();
+  const access = useAccess();
   const [param, setParam] = useState({});
 
   /** 刷新表格 */
@@ -126,11 +128,15 @@ const TableList: React.FC = () => {
       render: (t, r) => {
         return (
           <Space>
-            <a onClick={() => onJump(r?.saleStockOrderId)}>编辑</a>
-            <a onClick={() => handleDelete(r?.saleStockOrderId)}>删除</a>
+            <Access accessible={access.auth('sale.retrieval.edit')}>
+              <a onClick={() => onJump(r?.saleStockOrderId)}>编辑</a>
+            </Access>
+            <Access accessible={access.auth('sale.retrieval.delete')}>
+              <a onClick={() => handleDelete(r?.saleStockOrderId)}>删除</a>
+            </Access>
           </Space>
-        )
-      }
+        );
+      },
     }
   ]
 
@@ -146,16 +152,20 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          <Button type="primary" onClick={() => onJump()}>
-            <PlusOutlined />
-            新增
-          </Button>
+          <Access accessible={access.auth('sale.retrieval.add')}>
+            <Button type="primary" onClick={() => onJump()}>
+              <PlusOutlined />
+              新增
+            </Button>
+          </Access>
         }
         toolBarRender={() => [
-          <Button key="export" onClick={() => downloadExcel('POST', EXPORT_URL.SALE, param)}>
-            <DownloadOutlined />
-            导出明细
-          </Button>,
+          <Access key="export" accessible={access.auth('sale.retrieval.export')}>
+            <Button onClick={() => downloadExcel('POST', EXPORT_URL.SALE, param)}>
+              <DownloadOutlined />
+              导出明细
+            </Button>
+          </Access>,
         ]}
         // options={false}
         request={(params, sorter, filter) =>

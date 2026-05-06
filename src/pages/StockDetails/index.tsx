@@ -87,12 +87,12 @@ const TableList: React.FC = () => {
         }}
         headerTitle={false}
         toolBarRender={() => [
-          // <Access accessible={access.auth('stock.details.export')}>
-            <Button key="" onClick={() => downloadExcel('POST', EXPORT_URL['PRODUCT_STOCK'], param)}>
+          <Access key="export" accessible={access.auth('stock.details.export')}>
+            <Button onClick={() => downloadExcel('POST', EXPORT_URL['PRODUCT_STOCK'], param)}>
               <DownloadOutlined />
               导出明细
             </Button>
-          // </Access>
+          </Access>
         ]}
         // options={false}
         request={(params, sorter, filter) =>

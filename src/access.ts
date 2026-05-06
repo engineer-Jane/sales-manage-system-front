@@ -9,11 +9,17 @@
 // }
 export default function access(initialState: {
   currentUser?: any | undefined;
-  permissionCodes?: [];
+  permissionCodes?: unknown;
 }) {
-  const permissionCodes = initialState?.permissionCodes || [];
+  const raw = initialState?.permissionCodes;
+  const permissionCodes = Array.isArray(raw) ? raw : [];
   return {
-    auth: (auth: string) => permissionCodes?.includes(auth), // 按业务需求自己任意定义鉴权函数
-    normalRouteFilter: (route: any) => permissionCodes?.includes(route?.auth), // initialState 中包含了的路由才有权限访问
+    auth: (auth: string) => permissionCodes.includes(auth),
+    /** 未配置 auth 的路由不做菜单过滤（例如权限配置页） */
+    normalRouteFilter: (route: any) => {
+      const code = route?.auth;
+      if (code === undefined || code === null || code === '') return true;
+      return permissionCodes.includes(code);
+    },
   };
 }

@@ -3,6 +3,8 @@
  * 构建产物在 Vercel 等静态托管上由客户端短路返回，不发起真实 HTTP。
  */
 
+import { getAllRegisteredCodes } from '../constants/permissionRegistry';
+
 export type MockJsonBody = Record<string, unknown>;
 
 const wrap = (data: unknown, msg = 'success'): MockJsonBody => ({
@@ -15,7 +17,7 @@ const mockUserInfo = {
   userId: '1',
   userName: 'admin',
   realName: '演示管理员',
-  resourceCodes: [] as string[],
+  resourceCodes: getAllRegisteredCodes(),
   phone: '13800000000',
 };
 

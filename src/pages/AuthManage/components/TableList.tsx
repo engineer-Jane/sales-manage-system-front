@@ -73,9 +73,9 @@ const TableList: React.FC<TableListProps> = (props) => {
         return (
           <Space>
             {/* 配置角色 */}
-            // <Access accessible={access.auth('base.auth.configRole')}>
+            <Access accessible={access.auth('base.auth.configRole')}>
               <ConfigRole id={r.userId} />
-            // </Access>
+            </Access>
           </Space>
         )
       }

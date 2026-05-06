@@ -114,17 +114,17 @@ const TableList: React.FC = () => {
         return (
           <Space>
             {/* 编辑 */}
-            // <Access accessible={access.auth('base.user.edit')}>
+            <Access accessible={access.auth('base.user.edit')}>
               <a onClick={() => onJump(r?.userId)}>编辑</a>
-            // </Access>
+            </Access>
             {/* 所属部门 */}
-            // <Access accessible={access.auth('base.user.setDepartment')}>
+            <Access accessible={access.auth('base.user.setDepartment')}>
               <EditOrgModal id={r?.userId} refreshTable={refreshTable} />
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('base.user.delete')}>
+            <Access accessible={access.auth('base.user.delete')}>
               <a onClick={() => handleDelete(r?.userId)}>删除</a>
-            // </Access>
+            </Access>
           </Space>
         )
       }
@@ -143,12 +143,12 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('base.user.add')}>
+          <Access accessible={access.auth('base.user.add')}>
             <Button type="primary" onClick={() => onJump()}>
               <PlusOutlined />
               新增
             </Button>
-          // </Access>
+          </Access>
         }
         // toolBarRender={false}
         // options={false}

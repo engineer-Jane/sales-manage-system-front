@@ -84,17 +84,17 @@ const TableList: React.FC = () => {
         return (
           <Space>
             {/* 编辑 */}
-            // <Access accessible={access.auth('base.role.edit')}>
+            <Access accessible={access.auth('base.role.edit')}>
               <AddModal title="编辑" id={r?.roleId} refreshTable={refreshTable} />
-            // </Access>
+            </Access>
             {/* 功能权限 */}
-            // <Access accessible={access.auth('base.role.setFun')}>
+            <Access accessible={access.auth('base.role.setFun')}>
               <SourceTreeModel id={r.roleId} />
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('base.role.delete')}>
+            <Access accessible={access.auth('base.role.delete')}>
               <a onClick={() => handleDelete(r?.roleId)}>删除</a>
-            // </Access>
+            </Access>
           </Space>
         )
       }
@@ -113,9 +113,9 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('base.role.add')}>
+          <Access accessible={access.auth('base.role.add')}>
             <AddModal title="新增" refreshTable={refreshTable} />
-          // </Access>
+          </Access>
         }
         // toolBarRender={false}
         // options={false}

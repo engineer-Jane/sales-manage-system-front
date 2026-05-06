@@ -152,13 +152,13 @@ const TableList: React.FC = () => {
         return (
           <Space>
             {/* 编辑 */}
-            // <Access accessible={access.auth('bills.paymentRecord.edit')}>
+            <Access accessible={access.auth('bills.paymentRecord.edit')}>
               <a onClick={() => onJump(r?.paymentId)}>编辑</a>
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('bills.paymentRecord.delete')}>
+            <Access accessible={access.auth('bills.paymentRecord.delete')}>
               <a onClick={() => handleDelete(r?.paymentId)}>删除</a>
-            // </Access>
+            </Access>
           </Space>
         )
       }
@@ -177,20 +177,20 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('bills.paymentRecord.add')}>
+          <Access accessible={access.auth('bills.paymentRecord.add')}>
             <Button type="primary" onClick={() => onJump()}>
               <PlusOutlined />
               新增
             </Button>
-          // </Access>
+          </Access>
         }
         toolBarRender={() => [
-          // <Access accessible={access.auth('bills.paymentRecord.export')}>
-            <Button key="" onClick={() => downloadExcel('POST', EXPORT_URL['PREPAYMENT_RECORD'], param)}>
+          <Access key="export" accessible={access.auth('bills.paymentRecord.export')}>
+            <Button onClick={() => downloadExcel('POST', EXPORT_URL['PREPAYMENT_RECORD'], param)}>
               <DownloadOutlined />
               导出明细
             </Button>
-          // </Access>
+          </Access>
         ]}
         // options={false}
         request={(params, sorter, filter) =>

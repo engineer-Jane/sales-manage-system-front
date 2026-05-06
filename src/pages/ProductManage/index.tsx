@@ -105,13 +105,13 @@ const TableList: React.FC = () => {
         return (
           <Space>
             {/* 编辑 */}
-            // <Access accessible={access.auth('base.product.edit')}>
+            <Access accessible={access.auth('base.product.edit')}>
               <AddModal title="编辑" id={r?.productId} refreshTable={refreshTable} />
-            // </Access>
+            </Access>
             {/* 删除 */}
-            // <Access accessible={access.auth('base.product.delete')}>
+            <Access accessible={access.auth('base.product.delete')}>
               <a onClick={() => handleDelete(r?.productId)}>删除</a>
-            // </Access>
+            </Access>
           </Space>
         )
       }
@@ -130,9 +130,9 @@ const TableList: React.FC = () => {
           pageSize: 10
         }}
         headerTitle={
-          // <Access accessible={access.auth('base.product.add')}>
+          <Access accessible={access.auth('base.product.add')}>
             <AddModal title="新增" refreshTable={refreshTable} />
-          // </Access>
+          </Access>
         }
         // toolBarRender={false}
         // options={false}
