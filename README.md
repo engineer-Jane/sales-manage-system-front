@@ -35,6 +35,12 @@
 - **权限清单**：`src/constants/permissionRegistry.ts` 中的 `PERMISSION_MODULES` 维护「一级模块 → 二级页面 → 按钮」树，与路由及各页 `<Access>` 使用的字符串保持一致。
 - **演示环境**：`src/mock/apiHandlers.ts` 中演示用户默认下发 `getAllRegisteredCodes()`，即注册表中的全部权限；对接真实后端时需保证后端返回的编码与前端路由、`permissionRegistry` 一致（含如 `workspace`、`sale.retrieval.*`、`stock.retrieval.*` 等）。
 
+## 数据脱敏
+
+- **工具**：`src/utils/desensitize.ts` 提供 `displayMasked` 及手机号、姓名、地址、税号、银行卡号等掩码函数；仅在 **表格等只读展示** 中使用，**表单编辑页不入库前勿脱敏**，以免保存错误数据。
+- **已接入列表**：员工管理、权限管理-用户表、客户管理（电话与地址）、产品品牌管理（厂家电话与地址）、员工管理（Staff）列表中的姓名与电话等字段。
+- **调试**：构建或启动环境变量 **`REACT_APP_DESENSITIZE=false`** 时展示明文（仅限可信调试环境）。
+
 ## 环境要求
 
 - Node.js ≥ 12（推荐 **18 LTS** 或 **20 LTS**）
@@ -106,7 +112,7 @@ src/
   services/                接口封装
   components/              公共组件
   mock/apiHandlers.ts      业务接口 Mock 响应体映射
-  utils/                   请求、本地缓存、文件导出等
+  utils/                   请求、本地缓存、文件导出、desensitize（列表脱敏）等
 ```
 
 ## 参考文档

@@ -10,6 +10,7 @@ import type { API } from './typings';
 import { CUSTOMER_TYPE } from '@/constants';
 import { TransfArrObj } from '@/utils';
 import { useAccess, Access } from 'umi';
+import { displayMasked, maskAddress, maskTel } from '@/utils/desensitize';
 
 /** 客户管理 */
 
@@ -97,6 +98,7 @@ const TableList: React.FC = () => {
       dataIndex: 'customerAddress',
       valueType: 'text',
       hideInSearch: true,
+      render: (_, r) => displayMasked(r?.customerAddress, maskAddress),
     },
     {
       title: '开票资料',
@@ -110,6 +112,7 @@ const TableList: React.FC = () => {
       dataIndex: 'customerTel',
       valueType: 'text',
       hideInSearch: true,
+      render: (_, r) => displayMasked(r?.customerTel, maskTel),
     },
     {
       title: '备注',

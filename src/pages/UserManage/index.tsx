@@ -9,6 +9,7 @@ import { userApi } from '@/services/api';
 import type { API } from './typings';
 import EditOrgModal from './components/EditOrgModal';
 import { useAccess, Access } from 'umi';
+import { displayMasked, maskPersonName, maskTel } from '@/utils/desensitize';
 
 /** 员工管理 */
 
@@ -74,12 +75,14 @@ const TableList: React.FC = () => {
       title: '员工姓名',
       dataIndex: 'realName',
       valueType: 'text',
+      render: (_, r) => displayMasked(r?.realName, maskPersonName),
     },
     {
       title: '登录名',
       dataIndex: 'userName',
       valueType: 'text',
-      hideInSearch: true
+      hideInSearch: true,
+      render: (_, r) => displayMasked(r?.userName, (s) => (s.length <= 3 ? s : `${s.slice(0, 2)}***${s.slice(-1)}`)),
     },
     {
       title: '出生日期',
@@ -91,6 +94,7 @@ const TableList: React.FC = () => {
       title: '联系电话',
       dataIndex: 'phone',
       valueType: 'text',
+      render: (_, r) => displayMasked(r?.phone, maskTel),
     },
     // {
     //   title: '入职时间',

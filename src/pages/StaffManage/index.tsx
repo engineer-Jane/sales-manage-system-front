@@ -5,6 +5,7 @@ import { Button, Modal, Space } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import { PlusOutlined } from '@ant-design/icons';
 import { history } from 'umi';
+import { displayMasked, maskPersonName, maskTel } from '@/utils/desensitize';
 
 /** 员工管理 */
 
@@ -80,6 +81,7 @@ const TableList: React.FC = () => {
       title: '员工姓名',
       dataIndex: 'name',
       valueType: 'text',
+      render: (_, r) => displayMasked((r as API.TableItem)?.name, maskPersonName),
     },
     {
       title: '登录名',
@@ -97,6 +99,8 @@ const TableList: React.FC = () => {
       title: '联系电话',
       dataIndex: 'code',
       valueType: 'text',
+      render: (_, r) =>
+        displayMasked((r as API.TableItem & { phone?: string })?.phone ?? (r as API.TableItem)?.code, maskTel),
     },
     {
       title: '入职时间',

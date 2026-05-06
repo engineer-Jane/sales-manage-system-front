@@ -7,6 +7,7 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { brandApi } from '@/services/api';
 import type { API } from './typings';
 import { useAccess, Access } from 'umi';
+import { displayMasked, maskAddress, maskTel } from '@/utils/desensitize';
 
 /** 产品品牌管理 */
 
@@ -77,13 +78,15 @@ const TableList: React.FC = () => {
       title: '厂家电话',
       dataIndex: 'factoryTel',
       valueType: 'text',
-      hideInSearch: true
+      hideInSearch: true,
+      render: (_, r) => displayMasked(r?.factoryTel, maskTel),
     },
     {
       title: '厂家地址',
       dataIndex: 'factoryAddress',
       valueType: 'text',
-      hideInSearch: true
+      hideInSearch: true,
+      render: (_, r) => displayMasked(r?.factoryAddress, maskAddress),
     },
     {
       title: '备注信息',

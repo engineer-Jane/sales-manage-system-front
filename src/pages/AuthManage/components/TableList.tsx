@@ -6,6 +6,7 @@ import { userApi } from '@/services/api';
 import type { API } from '../typings';
 import ConfigRole from './ConfigRole';
 import { useAccess, Access } from 'umi';
+import { displayMasked, maskPersonName, maskTel } from '@/utils/desensitize';
 
 type TableListProps = {
   /** 父级Id */
@@ -55,13 +56,15 @@ const TableList: React.FC<TableListProps> = (props) => {
       title: '员工名称',
       dataIndex: 'realName',
       valueType: 'text',
-      hideInSearch: true
+      hideInSearch: true,
+      render: (_, r) => displayMasked(r?.realName, maskPersonName),
     },
     {
       title: '员工电话',
       dataIndex: 'phone',
       valueType: 'text',
-      hideInSearch: true
+      hideInSearch: true,
+      render: (_, r) => displayMasked(r?.phone, maskTel),
     },
     {
       title: '操作',
