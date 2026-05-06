@@ -11,6 +11,7 @@ import Footer from '@/components/Footer';
 import styles from './index.less';
 import { authApi } from '@/services/api';
 import { setLocalData } from '@/utils';
+import { getAllRegisteredCodes, withDefaultWorkspaceAccess } from '@/constants/permissionRegistry';
 
 const LoginMessage: React.FC<{
   content: string;
@@ -50,14 +51,16 @@ const Login: React.FC = () => {
 
   const fetchUserInfo = async (userInfo?: any) => {
     await setLocalData('user', userInfo);
-    // 缓存权限数据
-    await setLocalData('permissionCodes', userInfo.resourceCodes);
-    // const userInfo = await initialState?.fetchUserInfo?.();
+    const resourceCodes = Array.isArray(userInfo?.resourceCodes) ? userInfo.resourceCodes : [];
+    const baseCodes =
+      resourceCodes.length > 0 ? resourceCodes : getAllRegisteredCodes();
+    const permissionCodes = withDefaultWorkspaceAccess(baseCodes);
+    await setLocalData('permissionCodes', permissionCodes);
     if (userInfo) {
       await setInitialState((s) => ({
         ...s,
         currentUser: userInfo,
-        permissionCodes: userInfo.resourceCodes
+        permissionCodes,
       }));
     }
   };

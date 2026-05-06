@@ -293,3 +293,23 @@ export function getAllRegisteredCodes(): string[] {
   });
   return Array.from(set);
 }
+
+/** 仅侧栏一级 + 二级页面路由权限码（不含各页按钮细项） */
+export function getAllMenuPermissionCodes(): string[] {
+  const set = new Set<string>();
+  PERMISSION_MODULES.forEach((m) => {
+    set.add(m.code);
+    m.pages.forEach((p) => set.add(p.menuCode));
+  });
+  return Array.from(set);
+}
+
+/** 与 routes 中工作台 `auth: 'workspace'` 一致 */
+export const WORKSPACE_PERMISSION_CODE = 'workspace';
+
+/** 保证默认具备工作台菜单权限（后端下发列表常不含此项时仍可进入首页） */
+export function withDefaultWorkspaceAccess(codes: string[]): string[] {
+  const set = new Set(codes);
+  set.add(WORKSPACE_PERMISSION_CODE);
+  return Array.from(set);
+}

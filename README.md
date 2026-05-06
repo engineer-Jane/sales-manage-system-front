@@ -34,6 +34,8 @@
 - **运行时校验**：`src/access.ts` 提供 `auth(code)`（按钮等）与 `normalRouteFilter(route)`（菜单路由）；未配置 `auth` 的路由（如权限配置页）不做过滤。
 - **权限清单**：`src/constants/permissionRegistry.ts` 中的 `PERMISSION_MODULES` 维护「一级模块 → 二级页面 → 按钮」树，与路由及各页 `<Access>` 使用的字符串保持一致。
 - **演示环境**：`src/mock/apiHandlers.ts` 中演示用户默认下发 `getAllRegisteredCodes()`，即注册表中的全部权限；对接真实后端时需保证后端返回的编码与前端路由、`permissionRegistry` 一致（含如 `workspace`、`sale.retrieval.*`、`stock.retrieval.*` 等）。
+- **默认全开**：若本地无 `permissionCodes` 或登录后用户信息里 `resourceCodes` 为空数组，前端会写入 **`getAllRegisteredCodes()`**（菜单与各页按钮权限均已勾选），避免侧栏空白；后端若有下发则以服务端列表为准。注册表中 **`getAllMenuPermissionCodes()`** 仅含菜单路由码，可供扩展使用。
+- **工作台**：权限码 **`workspace`**（`/workspace`）会通过 **`withDefaultWorkspaceAccess`** 在登录合并及本地缓存读取时自动补足，避免后端未下发时无法进入工作台首页。
 
 ## 数据脱敏
 

@@ -5,7 +5,8 @@ import { history } from 'umi';
 import RightContent from '@/components/RightContent';
 import defaultSettings from '../config/defaultSettings';
 import { isMockApiEnabled, resolveSalesMock } from '@/utils/mockApiClient';
-import { getLocalData } from './utils';
+import { getAllRegisteredCodes, withDefaultWorkspaceAccess } from '@/constants/permissionRegistry';
+import { getLocalData, setLocalData } from './utils';
 
 /**
  * 必须在运行时挂在 @umijs/plugin-request 上：全局拦截所有 `request` / `useRequest`，
@@ -50,7 +51,17 @@ export async function getInitialState(): Promise<{
   const fetchPermissionCodes = async () => {
     try {
       const raw = await getLocalData('permissionCodes');
-      return Array.isArray(raw) ? raw : [];
+      const arr = Array.isArray(raw) ? raw : [];
+      if (!arr.length) {
+        const fallback = getAllRegisteredCodes();
+        await setLocalData('permissionCodes', fallback);
+        return fallback;
+      }
+      const merged = withDefaultWorkspaceAccess(arr);
+      if (merged.length !== arr.length) {
+        await setLocalData('permissionCodes', merged);
+      }
+      return merged;
     } catch (error) {
       history.push(loginPath);
     }
